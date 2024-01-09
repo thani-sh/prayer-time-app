@@ -1,7 +1,7 @@
 import {forDate} from '@thani-sh/prayer-time-lk';
 import {usePreferences} from './usePreferences';
 
-export function getPrayerTimes(date: Date, isHanafi = false) {
+export function getPrayerTimes(date: Date, asrMethod = 'shafi') {
   const times = forDate(date);
   const entries = [
     {key: 'Fajr', val: times.fajr},
@@ -11,13 +11,13 @@ export function getPrayerTimes(date: Date, isHanafi = false) {
     {key: 'Maghrib', val: times.maghrib},
     {key: 'Isha', val: times.isha},
   ];
-  if (isHanafi) {
+  if (asrMethod === 'hanafi') {
     entries[3] = {key: 'Asr (حَنَفِية)', val: times.asr_hanafi};
   }
   return entries;
 }
 
 export function usePrayerTimes(date: Date) {
-  const {isHanafi} = usePreferences();
-  return getPrayerTimes(date, isHanafi);
+  const {asrMethod} = usePreferences();
+  return getPrayerTimes(date, asrMethod);
 }
