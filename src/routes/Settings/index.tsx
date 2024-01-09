@@ -14,6 +14,7 @@ const useStyles = () => {
       flexDirection: 'column',
       alignItems: 'center',
       justifyContent: 'center',
+      backgroundColor: theme.pageColor,
     },
     screenContent: {
       flex: 1,
@@ -34,7 +35,7 @@ const useStyles = () => {
 };
 
 export const ASR_METHODS: {value: AsrMethod; label: string}[] = [
-  {value: 'shafi', label: 'Shafi'},
+  {value: 'shafi', label: 'Shafi, ...'},
   {value: 'hanafi', label: 'Hanafi'},
 ];
 
@@ -68,8 +69,8 @@ export default ({navigation}: Props) => {
   );
 
   const entries = [
-    {key: 'Asr Method', val: toggleAsrMethod},
-    {key: 'App Theme', val: toggleAppTheme},
+    {key: 'Calculation', val: toggleAsrMethod},
+    {key: 'Theme', val: toggleAppTheme},
   ];
 
   return (
@@ -79,7 +80,7 @@ export default ({navigation}: Props) => {
       </View>
       <View style={styles.screenBottom}>
         <Pressable onPress={gotoMainScreen}>
-          <Text style={styles.bottomLink}>BACK TO MAIN</Text>
+          <Text style={styles.bottomLink}>BACK</Text>
         </Pressable>
       </View>
     </View>

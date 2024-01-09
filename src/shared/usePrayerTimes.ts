@@ -12,7 +12,7 @@ export function getPrayerTimes(date: Date, asrMethod = 'shafi') {
     {key: 'Isha', val: times.isha},
   ];
   if (asrMethod === 'hanafi') {
-    entries[3] = {key: 'Asr (حَنَفِية)', val: times.asr_hanafi};
+    entries[3] = {key: 'Asr', val: times.asr_hanafi};
   }
   return entries;
 }

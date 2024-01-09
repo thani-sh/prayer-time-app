@@ -5,6 +5,7 @@ import {usePrayerTimes} from '../../shared/usePrayerTimes';
 import {RouteParams} from '../types';
 import Table from './_Table';
 import { useAppTheme } from '../../shared/useApptheme';
+import { usePreferences } from '../../shared/usePreferences';
 
 const useStyles = () => {
   const theme = useAppTheme();
@@ -13,6 +14,7 @@ const useStyles = () => {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: theme.pageColor,
   },
   screenContent: {
     flex: 1,
@@ -24,6 +26,7 @@ const useStyles = () => {
   screenTitle: {
     fontSize: 42,
     fontWeight: '600',
+    letterSpacing: 1,
     color: theme.textColor,
   },
   screenSubtitle: {
@@ -35,13 +38,6 @@ const useStyles = () => {
   selectedDate: {
     fontSize: 15,
     color: theme.linkColor,
-    letterSpacing: 1,
-    textTransform: 'uppercase',
-  },
-  resetToToday: {
-    marginLeft: 10,
-    fontSize: 10,
-    color: theme.textColor,
     letterSpacing: 1,
     textTransform: 'uppercase',
   },
@@ -57,13 +53,19 @@ const useStyles = () => {
 };
 
 function formatDate(date: Date): string {
-  return date.toLocaleString('en', {month: 'long', day: 'numeric', year: 'numeric'});
+  const parts = [
+    date.toLocaleString('en', {month: 'short', day: 'numeric', year: 'numeric'}),
+    date.toLocaleString('ar-TN-u-ca-islamic', {month: 'short', day: 'numeric', year: 'numeric'}),
+  ];
+  return parts.join('  |  ');
 }
 
 type Props = RouteParams<'Prayers'>;
 
 export default ({navigation}: Props) => {
   const styles = useStyles();
+  const theme = useAppTheme();
+  const {appTheme} = usePreferences();
   const [open, setOpen] = useState(false);
   const [date, setDate] = useState(new Date());
   const entries = usePrayerTimes(date);
@@ -81,18 +83,13 @@ export default ({navigation}: Props) => {
           <Pressable onPress={() => setOpen(true)}>
             <Text style={styles.selectedDate}>{formatDate(date)}</Text>
           </Pressable>
-          {!isDateToday && (
-            <Pressable onPress={() => setDate(new Date())}>
-              <Text style={styles.resetToToday}>RESET</Text>
-            </Pressable>
-          )}
         </View>
         <Table entries={entries} />
       </View>
 
       <View style={styles.screenBottom}>
         <Pressable onPress={gotoPreferences}>
-          <Text style={styles.bottomLink}>PREFERENCES</Text>
+          <Text style={styles.bottomLink}>SETTINGS</Text>
         </Pressable>
       </View>
 
@@ -100,7 +97,10 @@ export default ({navigation}: Props) => {
         modal
         open={open}
         mode="date"
-        theme="dark"
+        theme={appTheme}
+        textColor={theme.textColor}
+        cancelText='Reset'
+        confirmText='Select'
         date={date}
         onConfirm={value => {
           setOpen(false);
@@ -108,6 +108,7 @@ export default ({navigation}: Props) => {
         }}
         onCancel={() => {
           setOpen(false);
+          setDate(new Date());
         }}
       />
     </View>

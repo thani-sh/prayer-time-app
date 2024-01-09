@@ -19,6 +19,7 @@ const useStyles = () => {
       paddingVertical: 4,
       paddingHorizontal: 12,
       fontSize: 18,
+      fontWeight: '600',
       textAlign: 'right',
       color: theme.textColor,
     },

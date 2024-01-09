@@ -8,17 +8,17 @@ export interface Theme {
 }
 
 export const DarkTheme: Theme = {
-  pageColor: '#111111',
-  textColor: '#ECEFF1',
-  linkColor: '#37474F',
-  lineColor: '#1c1c1c',
+  pageColor: '#000000',
+  textColor: '#FAFAFA',
+  linkColor: '#616161',
+  lineColor: '#212121',
 };
 
 export const LightTheme: Theme = {
-  pageColor: '#ECEFF1',
+  pageColor: '#CFD8DC',
   textColor: '#263238',
-  linkColor: '#607D8B',
-  lineColor: '#B0BEC5',
+  linkColor: '#546E7A',
+  lineColor: '#90A4AE',
 };
 
 export const useAppTheme = () => {

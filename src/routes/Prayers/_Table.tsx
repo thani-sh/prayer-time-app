@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {Appearance, StyleSheet, Text, View} from 'react-native';
 import { useAppTheme } from '../../shared/useApptheme';
 
 const useStyles = () => {
@@ -18,11 +18,22 @@ const useStyles = () => {
     borderRadius: 1,
     borderColor: theme.lineColor,
   },
+  rowWithBorder: {
+    flexDirection: 'row',
+    width: 300,
+    paddingVertical: 12,
+    borderStyle: 'dashed',
+    borderRadius: 1,
+    borderColor: theme.lineColor,
+    borderTopWidth: StyleSheet.hairlineWidth,
+  },
   key: {
     flex: 1,
     paddingVertical: 4,
     paddingHorizontal: 12,
     fontSize: 18,
+    fontWeight: '600',
+    letterSpacing: 1,
     textAlign: 'right',
     color: theme.textColor,
   },
@@ -32,10 +43,10 @@ const useStyles = () => {
     paddingHorizontal: 12,
     fontSize: 18,
     color: theme.textColor,
-    borderStyle: 'dotted',
+    borderStyle: 'dashed',
     borderRadius: 1,
     borderColor: theme.lineColor,
-    borderLeftWidth: 1,
+    borderLeftWidth: StyleSheet.hairlineWidth,
   },
 });
 };
@@ -57,7 +68,7 @@ export default (props: Props) => {
   return (
     <View style={styles.container}>
       {props.entries.map(({key, val}, i) => (
-        <View key={key} style={{...styles.row, borderTopWidth: i === 0 ? 0 : 1}}>
+        <View key={key} style={i === 0 ? styles.row : styles.rowWithBorder}>
           <Text style={styles.key}>{key}</Text>
           <Text style={styles.val}>{formatTime(val.hour, val.minute)}</Text>
         </View>
