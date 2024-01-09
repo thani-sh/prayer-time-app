@@ -1,4 +1,4 @@
-package com.prayers
+package me.thanish.prayers
 
 import android.app.Application
 import com.facebook.react.PackageList
