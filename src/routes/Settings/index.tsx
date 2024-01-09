@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
   screenContent: {
     flex: 1,
     flexDirection: 'column',
-    marginBottom: -60,
+    marginBottom: -40,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     marginBottom: 40,
   },
   bottomLink: {
-    fontSize: 12,
+    fontSize: 15,
     color: '#37474F',
     letterSpacing: 1,
   }

@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     fontSize: 18,
     textAlign: 'right',
-    color: '#ffffff',
+    color: '#ECEFF1',
   },
   val: {
     flex: 1,

@@ -3,7 +3,7 @@ import { Pressable, StyleSheet, Text } from 'react-native';
 
 const styles = StyleSheet.create({
   text: {
-    color: '#0288D1',
+    color: '#37474F',
     fontSize: 18,
   }
 })

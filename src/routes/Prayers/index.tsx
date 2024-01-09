@@ -14,14 +14,14 @@ const styles = StyleSheet.create({
   screenContent: {
     flex: 1,
     flexDirection: 'column',
-    marginBottom: -60,
+    marginBottom: -40,
     alignItems: 'center',
     justifyContent: 'center',
   },
   screenTitle: {
     fontSize: 42,
     fontWeight: '600',
-    color: '#ffffff',
+    color: '#ECEFF1',
   },
   screenSubtitle: {
     flexDirection: 'row',
@@ -30,19 +30,23 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   selectedDate: {
-    fontSize: 18,
-    color: '#0288D1',
+    fontSize: 15,
+    color: '#37474F',
+    letterSpacing: 1,
+    textTransform: 'uppercase',
   },
   resetToToday: {
     marginLeft: 10,
-    fontSize: 15,
-    color: '#03A9F4',
+    fontSize: 10,
+    color: '#ECEFF1',
+    letterSpacing: 1,
+    textTransform: 'uppercase',
   },
   screenBottom: {
     marginBottom: 40,
   },
   bottomLink: {
-    fontSize: 12,
+    fontSize: 15,
     color: '#37474F',
     letterSpacing: 1,
   }
@@ -74,7 +78,7 @@ export default ({ navigation }: Props) => {
           </Pressable>
           {!isDateToday && (
             <Pressable onPress={() => setDate(new Date())}>
-              <Text style={styles.resetToToday}>↺ reset</Text>
+              <Text style={styles.resetToToday}>RESET</Text>
             </Pressable>
           )}
         </View>
