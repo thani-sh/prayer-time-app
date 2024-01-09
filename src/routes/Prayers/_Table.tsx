@@ -1,7 +1,10 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
+import { useAppTheme } from '../../shared/useApptheme';
 
-const styles = StyleSheet.create({
+const useStyles = () => {
+  const theme = useAppTheme();
+  return StyleSheet.create({
   container: {
     alignItems: 'center',
     justifyContent: 'center',
@@ -13,7 +16,7 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     borderStyle: 'dotted',
     borderRadius: 1,
-    borderColor: '#1c1c1c',
+    borderColor: theme.lineColor,
   },
   key: {
     flex: 1,
@@ -21,20 +24,21 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     fontSize: 18,
     textAlign: 'right',
-    color: '#ECEFF1',
+    color: theme.textColor,
   },
   val: {
     flex: 1,
     paddingVertical: 4,
     paddingHorizontal: 12,
     fontSize: 18,
-    color: '#ECEFF1',
+    color: theme.textColor,
     borderStyle: 'dotted',
     borderRadius: 1,
-    borderColor: '#1c1c1c',
+    borderColor: theme.lineColor,
     borderLeftWidth: 1,
   },
 });
+};
 
 function formatTime(hour: number, minute: number): string {
   const h = String(hour > 12 ? hour - 12 : hour);
@@ -48,6 +52,8 @@ export interface Props {
 }
 
 export default (props: Props) => {
+  const styles = useStyles();
+
   return (
     <View style={styles.container}>
       {props.entries.map(({key, val}, i) => (

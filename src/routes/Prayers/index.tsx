@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import React, {useState} from 'react';
+import {Pressable, StyleSheet, Text, View} from 'react-native';
 import DatePicker from 'react-native-date-picker';
-import { usePrayerTimes } from '../../shared/usePrayerTimes';
-import { RouteParams } from '../types';
+import {usePrayerTimes} from '../../shared/usePrayerTimes';
+import {RouteParams} from '../types';
 import Table from './_Table';
+import { useAppTheme } from '../../shared/useApptheme';
 
-const styles = StyleSheet.create({
+const useStyles = () => {
+  const theme = useAppTheme();
+  return StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
@@ -21,7 +24,7 @@ const styles = StyleSheet.create({
   screenTitle: {
     fontSize: 42,
     fontWeight: '600',
-    color: '#ECEFF1',
+    color: theme.textColor,
   },
   screenSubtitle: {
     flexDirection: 'row',
@@ -31,14 +34,14 @@ const styles = StyleSheet.create({
   },
   selectedDate: {
     fontSize: 15,
-    color: '#37474F',
+    color: theme.linkColor,
     letterSpacing: 1,
     textTransform: 'uppercase',
   },
   resetToToday: {
     marginLeft: 10,
     fontSize: 10,
-    color: '#ECEFF1',
+    color: theme.textColor,
     letterSpacing: 1,
     textTransform: 'uppercase',
   },
@@ -47,10 +50,11 @@ const styles = StyleSheet.create({
   },
   bottomLink: {
     fontSize: 15,
-    color: '#37474F',
+    color: theme.linkColor,
     letterSpacing: 1,
-  }
+  },
 });
+};
 
 function formatDate(date: Date): string {
   return date.toLocaleString('en', {month: 'long', day: 'numeric', year: 'numeric'});
@@ -58,15 +62,16 @@ function formatDate(date: Date): string {
 
 type Props = RouteParams<'Prayers'>;
 
-export default ({ navigation }: Props) => {
+export default ({navigation}: Props) => {
+  const styles = useStyles();
   const [open, setOpen] = useState(false);
   const [date, setDate] = useState(new Date());
   const entries = usePrayerTimes(date);
 
   const isDateToday = date.toDateString() === new Date().toDateString();
   const gotoPreferences = () => {
-    navigation.navigate('Settings', {})
-  }
+    navigation.navigate('Settings', {});
+  };
 
   return (
     <View style={styles.container}>

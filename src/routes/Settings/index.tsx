@@ -1,59 +1,76 @@
 import React from 'react';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
-import { RouteParams } from '../types';
+import {Pressable, StyleSheet, Text, View} from 'react-native';
+import {RouteParams} from '../types';
 import Table from './_Table';
 import Switch from './_Switch';
-import { AsrMethod, usePreferences } from '../../shared/usePreferences';
+import {AppTheme, AsrMethod, usePreferences} from '../../shared/usePreferences';
+import {useAppTheme} from '../../shared/useApptheme';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  screenContent: {
-    flex: 1,
-    flexDirection: 'column',
-    marginBottom: -40,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  screenBottom: {
-    marginBottom: 40,
-  },
-  bottomLink: {
-    fontSize: 15,
-    color: '#37474F',
-    letterSpacing: 1,
-  }
-});
+const useStyles = () => {
+  const theme = useAppTheme();
+  return StyleSheet.create({
+    container: {
+      flex: 1,
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    screenContent: {
+      flex: 1,
+      flexDirection: 'column',
+      marginBottom: -40,
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    screenBottom: {
+      marginBottom: 40,
+    },
+    bottomLink: {
+      fontSize: 15,
+      color: theme.linkColor,
+      letterSpacing: 1,
+    },
+  });
+};
 
-export const ASR_METHODS: { value: AsrMethod, label: string }[] = [
-  { value: "shafi", label: "Shafi" },
-  { value: "hanafi", label: "Hanafi" },
-]
+export const ASR_METHODS: {value: AsrMethod; label: string}[] = [
+  {value: 'shafi', label: 'Shafi'},
+  {value: 'hanafi', label: 'Hanafi'},
+];
+
+export const APP_THEMES: {value: AppTheme; label: string}[] = [
+  {value: 'light', label: 'Light'},
+  {value: 'dark', label: 'Dark'},
+];
 
 type Props = RouteParams<'Settings'>;
 
-export default ({ navigation }: Props) => {
-  const preferences = usePreferences()
+export default ({navigation}: Props) => {
+  const styles = useStyles();
+  const preferences = usePreferences();
 
   const gotoMainScreen = () => {
-    navigation.navigate('Prayers', {})
-  }
+    navigation.navigate('Prayers', {});
+  };
 
   const changeAsrMethod = (value: AsrMethod) => {
-    preferences.setAsrMethod(value)
-  }
-  const toggleAsrMethod = <Switch<AsrMethod>
-    value={preferences.asrMethod}
-    entries={ASR_METHODS}
-    onChange={changeAsrMethod} />
+    preferences.setAsrMethod(value);
+  };
+  const toggleAsrMethod = (
+    <Switch<AsrMethod> value={preferences.asrMethod} entries={ASR_METHODS} onChange={changeAsrMethod} />
+  );
+
+  const changeAppTheme = (value: AppTheme) => {
+    preferences.setAppTheme(value);
+  };
+  const toggleAppTheme = (
+    <Switch<AppTheme> value={preferences.appTheme} entries={APP_THEMES} onChange={changeAppTheme} />
+  );
 
   const entries = [
-    { key: 'Asr Method', val: toggleAsrMethod }
-  ]
+    {key: 'Asr Method', val: toggleAsrMethod},
+    {key: 'App Theme', val: toggleAppTheme},
+  ];
 
   return (
     <View style={styles.container}>
@@ -66,5 +83,5 @@ export default ({ navigation }: Props) => {
         </Pressable>
       </View>
     </View>
-  )
-}
+  );
+};
