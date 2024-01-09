@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     borderStyle: 'dotted',
     borderRadius: 1,
-    borderColor: '#222222',
+    borderColor: '#1c1c1c',
   },
   key: {
     flex: 1,
@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     color: '#ffffff',
     borderStyle: 'dotted',
     borderRadius: 1,
-    borderColor: '#222222',
+    borderColor: '#1c1c1c',
     borderLeftWidth: 1,
   },
 });
